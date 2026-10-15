@@ -204,14 +204,14 @@ function renderDetail() {
     <table class="log">
       <thead><tr><th>When</th><th>Result</th><th>HTTP</th><th>Time</th><th>Detail</th></tr></thead>
       <tbody>
-        ${state.history.checks.map((check) => `
+        ${state.history.checks.filter((check) => check.status !== "up").map((check) => `
           <tr>
             <td>${escapeHtml(formatTime(check.checked_at))}</td>
-            <td class="${check.status === "up" ? "good" : "bad"}">${check.status}</td>
+            <td class="bad">${check.status}</td>
             <td>${check.http_status ?? "—"}</td>
             <td>${formatMs(check.response_ms)}</td>
             <td>${escapeHtml(check.error || "")}</td>
-          </tr>`).join("") || `<tr><td colspan="5">No checks in this range yet.</td></tr>`}
+          </tr>`).join("") || `<tr><td colspan="5">No failed checks in this range.</td></tr>`}
       </tbody>
     </table>`;
 
@@ -309,9 +309,10 @@ function folderHtml(item) {
   const children = folder.collapsed
     ? ""
     : `<div class="folder-children">${item.children.map((id) => monitorHtml(state.monitors.find((entry) => entry.id === id), folder.id)).join("")}</div>`;
+  const tone = problems ? "down" : "good";
   return `
     <div class="folder">
-      <div class="folder-head" draggable="true" data-kind="folder" data-id="${folder.id}">
+      <div class="folder-head ${tone}" draggable="true" data-kind="folder" data-id="${folder.id}">
         <button class="chevron" type="button" aria-label="${folder.collapsed ? "Expand" : "Collapse"} folder">${folder.collapsed ? "▸" : "▾"}</button>
         ${mark}
         ${name}

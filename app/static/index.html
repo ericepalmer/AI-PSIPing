@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Figtree:wght@400;520;650&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/style.css?v=6">
+  <link rel="stylesheet" href="/static/style.css?v=11">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23141c18'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%233dcb8a'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -15,9 +15,15 @@
 
   <main class="layout">
     <aside class="list-pane">
-      <button id="new-folder" class="new-folder" type="button">New folder</button>
       <div id="monitor-list" class="monitor-list"></div>
-      <button id="add-open" class="primary add-site" type="button">Add site</button>
+      <div class="list-actions">
+        <button id="add-open" class="icon-btn" type="button" aria-label="Add site" title="Add site">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button id="new-folder" class="icon-btn" type="button" aria-label="New folder" title="New folder">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.6 3.4c0-.6.5-1.1 1.1-1.1h3.2l1.3 1.4h6.1c.6 0 1.1.5 1.1 1.1v7.1c0 .6-.5 1.1-1.1 1.1H2.7c-.6 0-1.1-.5-1.1-1.1V3.4z" fill="currentColor"/></svg>
+        </button>
+      </div>
       <p id="summary" class="tally"></p>
     </aside>
     <section id="detail" class="detail"></section>
@@ -68,6 +74,6 @@
     <button type="button" data-action="delete">Delete folder</button>
   </div>
 
-  <script src="/static/app.js?v=6"></script>
+  <script src="/static/app.js?v=10"></script>
 </body>
 </html>
