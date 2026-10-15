@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PSIPing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Figtree:wght@400;520;650&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css?v=6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23141c18'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%233dcb8a'/%3E%3C/svg%3E">
+</head>
+<body>
+  <div id="alerts" class="alerts" aria-live="assertive"></div>
+
+  <main class="layout">
+    <aside class="list-pane">
+      <button id="new-folder" class="new-folder" type="button">New folder</button>
+      <div id="monitor-list" class="monitor-list"></div>
+      <button id="add-open" class="primary add-site" type="button">Add site</button>
+      <p id="summary" class="tally"></p>
+    </aside>
+    <section id="detail" class="detail"></section>
+  </main>
+
+  <dialog id="editor">
+    <form id="editor-form">
+      <h2 id="editor-title">Add a site</h2>
+      <label>
+        Name
+        <input id="field-name" name="name" type="text" maxlength="120" placeholder="Marketing site" autocomplete="off">
+      </label>
+      <label>
+        URL
+        <input id="field-url" name="url" type="text" required placeholder="https://example.com" autocomplete="off">
+      </label>
+      <div class="split">
+        <label>
+          Check every
+          <span class="field-row">
+            <input id="field-interval" name="interval" type="number" min="15" max="86400" value="60" required>
+            <span>seconds</span>
+          </span>
+        </label>
+        <label>
+          Timeout
+          <span class="field-row">
+            <input id="field-timeout" name="timeout" type="number" min="1" max="120" value="30" required>
+            <span>seconds</span>
+          </span>
+        </label>
+      </div>
+      <p class="hint">Default is once a minute. A check is down when the server does not answer within the timeout, the connection fails, or the HTTP status is outside 200–399.</p>
+      <label class="check">
+        <input id="field-alert" name="alert" type="checkbox" checked>
+        Show a screen alert when this site goes down or recovers
+      </label>
+      <div class="form-actions">
+        <button type="button" id="editor-cancel" class="ghost">Cancel</button>
+        <button type="submit" class="primary" id="editor-save">Start checking</button>
+      </div>
+      <p id="form-error" class="form-error" hidden></p>
+    </form>
+  </dialog>
+
+  <div id="folder-menu" class="folder-menu" hidden>
+    <button type="button" data-action="rename">Rename</button>
+    <button type="button" data-action="delete">Delete folder</button>
+  </div>
+
+  <script src="/static/app.js?v=6"></script>
+</body>
+</html>
